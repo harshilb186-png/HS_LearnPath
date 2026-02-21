@@ -1,0 +1,35 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-learning",
+      "description": "A student learning online with a laptop and books.",
+      "imageUrl": "https://picsum.photos/seed/learn-1/1200/600",
+      "imageHint": "learning education"
+    },
+    {
+      "id": "career-path",
+      "description": "Conceptual image of a career growth path.",
+      "imageUrl": "https://picsum.photos/seed/career-1/800/400",
+      "imageHint": "career growth"
+    },
+    {
+      "id": "frontend-dev",
+      "description": "Frontend development concept with code and design.",
+      "imageUrl": "https://picsum.photos/seed/frontend/600/400",
+      "imageHint": "coding programming"
+    },
+    {
+      "id": "backend-dev",
+      "description": "Backend development concept with servers and databases.",
+      "imageUrl": "https://picsum.photos/seed/backend/600/400",
+      "imageHint": "server database"
+    },
+    {
+      "id": "user-avatar",
+      "description": "User profile avatar.",
+      "imageUrl": "https://picsum.photos/seed/user-42/200/200",
+      "imageHint": "profile person"
+    }
+  ]
+}
