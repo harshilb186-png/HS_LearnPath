@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { CheckCircle2, Circle, PlayCircle, BookOpen, ChevronRight, Lock, Trophy, Sparkles } from "lucide-react";
+import { CheckCircle2, Circle, PlayCircle, BookOpen, ChevronRight, Lock, Trophy, Sparkles, Clock } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
