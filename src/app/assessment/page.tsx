@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -20,6 +19,7 @@ import {
   CheckCircle2,
   ShieldAlert
 } from "lucide-react";
+import Link from "next/link";
 import { assessUserSkills, AssessUserSkillsOutput } from "@/ai/flows/assess-user-skills";
 import { cn } from "@/lib/utils";
 
