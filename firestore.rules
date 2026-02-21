@@ -1,0 +1,130 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * LEARNPATH PRO SECURITY RULES
+     * 
+     * CORE PHILOSOPHY:
+     * This ruleset implements a robust Role-Based Access Control (RBAC) model combined with 
+     * a strict User-Ownership pattern. It is designed for high security during the prototyping 
+     * phase while maintaining flexibility for evolving data schemas.
+     * 
+     * DATA STRUCTURE:
+     * - /users/{userId}: Root profiles containing roles (Student, Teacher, Admin).
+     * - /users/{userId}/...: Private user-specific data (Assessments, Progress).
+     * - /{globalCollections}: Publicly readable resources (CareerPaths, LearningPaths, Modules, Skills) 
+     *   managed exclusively by Admins.
+     * 
+     * KEY SECURITY DECISIONS:
+     * 1. Path-Based Ownership: User-specific data is nested under the user's UID to ensure 
+     *    clear boundaries and performant listing.
+     * 2. Role-Based Global Access: Global entities are read-only for all authenticated users 
+     *    but restricted to 'Admin' for all write operations.
+     * 3. Relational Integrity: On creation of user-scoped documents, the internal 'userId' 
+     *    field is forced to match the path UID to prevent data spoofing.
+     * 4. State Safety: All updates and deletes require explicit existence checks to 
+     *    prevent operations on non-existent data.
+     */
+
+    // --- GLOBAL HELPER FUNCTIONS ---
+
+    /** @description Checks if the user is authenticated. */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /** @description Checks if the authenticated user matches the provided ID. */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /** @description Checks if the authenticated user is an owner of an existing document. */
+    function isExistingOwner(userId) {
+      return resource != null && isOwner(userId);
+    }
+
+    /** @description Fetches the user's role from their profile document. */
+    function getUserRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+
+    /** @description Checks if the authenticated user has the 'Admin' role. */
+    function isAdmin() {
+      return isSignedIn() && getUserRole() == 'Admin';
+    }
+
+    // --- COLLECTION RULES ---
+
+    /**
+     * @description Rules for the User profile collection.
+     * @path /users/{userId}
+     * @allow Authenticated user (create), Owner (get, update), Admin (list, delete).
+     * @deny Non-owners from reading or modifying other users' profiles.
+     * @principle Self-creation and ownership-based profile management.
+     */
+    match /users/{userId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId);
+      allow update: if isExistingOwner(userId) && request.resource.data.role == resource.data.role;
+      allow delete: if isAdmin();
+    }
+
+    /**
+     * @description Rules for Career Paths, Learning Paths, Modules, and Skills.
+     * @path /{globalCollection}/{docId}
+     * @allow All authenticated users (get, list), Admins (create, update, delete).
+     * @deny Non-admins from modifying global curriculum data.
+     * @principle Public read for authenticated users with Admin-only write control.
+     */
+    match /careerPaths/{careerPathId} {
+      allow get, list: if isSignedIn();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /learningPaths/{learningPathId} {
+      allow get, list: if isSignedIn();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /modules/{moduleId} {
+      allow get, list: if isSignedIn();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /skills/{skillId} {
+      allow get, list: if isSignedIn();
+      allow create, update, delete: if isAdmin();
+    }
+
+    /**
+     * @description Rules for a user's skill assessments.
+     * @path /users/{userId}/skillAssessments/{assessmentId}
+     * @allow Owner (get, list, create, update, delete).
+     * @deny Users from accessing or creating assessments for other users.
+     * @principle Path-based ownership and relational integrity via userId field.
+     */
+    match /users/{userId}/skillAssessments/{assessmentId} {
+      allow get, list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.userId == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
+      allow delete: if isExistingOwner(userId);
+    }
+
+    /**
+     * @description Rules for tracking a user's progress through modules.
+     * @path /users/{userId}/userModuleProgress/{progressId}
+     * @allow Owner (get, list, create, update, delete).
+     * @deny Access to progress data belonging to other users.
+     * @principle Path-based ownership and relational integrity via userId field.
+     */
+    match /users/{userId}/userModuleProgress/{progressId} {
+      allow get, list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.userId == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
+      allow delete: if isExistingOwner(userId);
+    }
+
+  }
+}

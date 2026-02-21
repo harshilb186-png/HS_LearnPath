@@ -1,0 +1,418 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the LearnPath Pro application, including their role and basic profile information. Authentication details are handled by an external system.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the User entity."
+        },
+        "username": {
+          "type": "string",
+          "description": "A unique username chosen by the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address, used for identification.",
+          "format": "email"
+        },
+        "role": {
+          "type": "string",
+          "description": "The assigned role of the user within the application (e.g., Student, Teacher, Admin).",
+          "format": "enum"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the user account was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the user account was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "email",
+        "role",
+        "createdAt"
+      ]
+    },
+    "CareerPath": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "CareerPath",
+      "type": "object",
+      "description": "Defines a specific career trajectory or professional goal, which can be mapped to various learning paths.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the CareerPath entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the career path (e.g., 'Full-stack Web Developer')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the career path, outlining its scope and objectives."
+        },
+        "learningPathIds": {
+          "type": "array",
+          "description": "References to LearningPath entities associated with this career path. (Relationship: CareerPath N:N LearningPath)",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
+    },
+    "LearningPath": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "LearningPath",
+      "type": "object",
+      "description": "A structured collection of modules designed to guide users through a specific learning journey towards a career path.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the LearningPath entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the learning path (e.g., 'Introduction to Python Programming')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A summary of what the learning path covers and its objectives."
+        },
+        "sourceUrl": {
+          "type": "string",
+          "description": "The URL to the primary source of content for this learning path, typically a GitHub repository or specific directory.",
+          "format": "uri"
+        },
+        "careerPathIds": {
+          "type": "array",
+          "description": "References to CareerPath entities that this learning path contributes to. (Relationship: LearningPath N:N CareerPath)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "moduleIds": {
+          "type": "array",
+          "description": "References to Module entities that constitute this learning path, ordered sequentially. (Relationship: LearningPath N:N Module)",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "sourceUrl"
+      ]
+    },
+    "Module": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Module",
+      "type": "object",
+      "description": "Represents an individual learning unit or topic within a learning path, often corresponding to a file or folder in the source repository.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Module entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The title of the module (e.g., 'Variables and Data Types')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of the module's content and learning outcomes."
+        },
+        "contentUrl": {
+          "type": "string",
+          "description": "The URL to the actual content file or resource for this module (e.g., a Markdown file on GitHub).",
+          "format": "uri"
+        },
+        "aiSummary": {
+          "type": "string",
+          "description": "An AI-generated summary of the key learning points from the module's content."
+        },
+        "learningPathIds": {
+          "type": "array",
+          "description": "References to LearningPath entities that this module is a part of. (Relationship: Module N:N LearningPath)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skillIds": {
+          "type": "array",
+          "description": "References to Skill entities that are taught or reinforced by this module. (Relationship: Module N:N Skill)",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "contentUrl"
+      ]
+    },
+    "Skill": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Skill",
+      "type": "object",
+      "description": "Defines a specific competency or ability that can be learned, assessed, and tracked.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Skill entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the skill (e.g., 'Object-Oriented Programming', 'Data Analysis')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed explanation of what the skill entails and its relevance."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
+    },
+    "SkillAssessment": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "SkillAssessment",
+      "type": "object",
+      "description": "Records the results of a user's skill assessment, including their performance and AI-generated feedback.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the SkillAssessment entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User who undertook the assessment. (Relationship: User 1:N SkillAssessment)"
+        },
+        "skillId": {
+          "type": "string",
+          "description": "Reference to the Skill that was assessed. (Relationship: Skill 1:N SkillAssessment)"
+        },
+        "assessmentDate": {
+          "type": "string",
+          "description": "The date and time when the skill assessment was completed.",
+          "format": "date-time"
+        },
+        "score": {
+          "type": "number",
+          "description": "The numerical score obtained in the assessment (e.g., a percentage or rating)."
+        },
+        "feedback": {
+          "type": "string",
+          "description": "AI-generated personalized feedback and suggestions for improvement based on the assessment results."
+        },
+        "suggestedModuleIds": {
+          "type": "array",
+          "description": "References to Module entities recommended for the user to improve the assessed skill. (Relationship: SkillAssessment N:N Module)",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "skillId",
+        "assessmentDate",
+        "score",
+        "feedback"
+      ]
+    },
+    "UserModuleProgress": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserModuleProgress",
+      "type": "object",
+      "description": "Tracks a specific user's progress and interaction status with individual learning modules.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the UserModuleProgress entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User whose progress is being tracked. (Relationship: User 1:N UserModuleProgress)"
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Reference to the Module for which progress is being tracked. (Relationship: Module 1:N UserModuleProgress)"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current progress status of the user for this module (e.g., 'Not Started', 'In Progress', 'Completed').",
+          "format": "enum"
+        },
+        "completionDate": {
+          "type": "string",
+          "description": "The date and time when the user completed this module, if applicable.",
+          "format": "date-time"
+        },
+        "lastAccessedDate": {
+          "type": "string",
+          "description": "The last date and time the user accessed or interacted with this module.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "moduleId",
+        "status"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores individual user profiles and their assigned roles (Student, Teacher, Admin). This collection is fundamental for role-based access control (DBAC).",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user, matching `request.auth.uid`."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/careerPaths/{careerPathId}",
+        "definition": {
+          "entityName": "CareerPath",
+          "schema": {
+            "$ref": "#/backend/entities/CareerPath"
+          },
+          "description": "Defines various career trajectories. These are global and generally read-only for students/teachers, with write access for admins.",
+          "params": [
+            {
+              "name": "careerPathId",
+              "description": "The unique identifier for a specific career path."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/learningPaths/{learningPathId}",
+        "definition": {
+          "entityName": "LearningPath",
+          "schema": {
+            "$ref": "#/backend/entities/LearningPath"
+          },
+          "description": "Structured collections of modules. These are global and generally read-only for students/teachers, with write access for admins.",
+          "params": [
+            {
+              "name": "learningPathId",
+              "description": "The unique identifier for a specific learning path."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/modules/{moduleId}",
+        "definition": {
+          "entityName": "Module",
+          "schema": {
+            "$ref": "#/backend/entities/Module"
+          },
+          "description": "Individual learning units within paths. These are global and generally read-only for students/teachers, with write access for admins.",
+          "params": [
+            {
+              "name": "moduleId",
+              "description": "The unique identifier for a specific learning module."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/skills/{skillId}",
+        "definition": {
+          "entityName": "Skill",
+          "schema": {
+            "$ref": "#/backend/entities/Skill"
+          },
+          "description": "Definitions of competencies or abilities. These are global and generally read-only for students/teachers, with write access for admins.",
+          "params": [
+            {
+              "name": "skillId",
+              "description": "The unique identifier for a specific skill."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/skillAssessments/{skillAssessmentId}",
+        "definition": {
+          "entityName": "SkillAssessment",
+          "schema": {
+            "$ref": "#/backend/entities/SkillAssessment"
+          },
+          "description": "Records individual user's skill assessment results. Includes denormalized 'userId' for authorization independence.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user who owns this assessment, matching the parent path."
+            },
+            {
+              "name": "skillAssessmentId",
+              "description": "The unique identifier for a specific skill assessment record."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/userModuleProgress/{userModuleProgressId}",
+        "definition": {
+          "entityName": "UserModuleProgress",
+          "schema": {
+            "$ref": "#/backend/entities/UserModuleProgress"
+          },
+          "description": "Tracks a specific user's progress through modules. Includes denormalized 'userId' for authorization independence.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user whose progress is being tracked, matching the parent path."
+            },
+            {
+              "name": "userModuleProgressId",
+              "description": "The unique identifier for a specific user module progress record."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The recommended Firestore structure is designed with a strong emphasis on authorization independence, clear access patterns, and scalability for the LearnPath Pro application. \n\n**Authorization Independence:**\nFor user-specific data such as 'SkillAssessment' and 'UserModuleProgress', the data is nested under `/users/{userId}/`. This path-based ownership, combined with the explicit `userId` field within each document (`resource.data.userId`), makes authorization highly independent. Security rules for these collections will directly compare `request.auth.uid` with the `{userId}` wildcard in the path and the `userId` field in the document. This eliminates the need for expensive and complex `get()` calls to parent documents to determine ownership, ensuring atomic operations and simplifying rule debugging.\n\nFor global entities like 'CareerPath', 'LearningPath', 'Module', and 'Skill', authorization primarily depends on the requesting user's role (Student, Teacher, Admin). The user's role is stored directly in their `/users/{userId}` profile document. While security rules will perform a single `get()` operation to fetch the `request.auth.uid`'s role from `/users/$(request.auth.uid)`, this is a standard and performant pattern for Database Access Control (DBAC) and is not considered a hierarchical dependency breaking atomic operations, as it retrieves well-known, self-owned data.\n\n**QAPs (Rules are not Filters) and Structural Segregation:**\n1.  **User-Private Data:** Collections like `/users/{userId}/skillAssessments` and `/users/{userId}/userModuleProgress` are strictly segregated for individual users. This inherent path-based filtering ensures that `list` queries automatically adhere to QAPs. A user can only 'list' documents under their own `{userId}` path, preventing accidental data exposure and simplifying rules (e.g., `allow read: if request.auth.uid == userId;`).\n2.  **Global Content:** 'CareerPaths', 'LearningPaths', 'Modules', and 'Skills' are placed in top-level collections. These entities are intended to be globally accessible (read-only) to all authenticated users (Students, Teachers, Admins) and editable only by Admins. This segregation ensures a homogeneous security posture for each collection: all documents within these collections share the same access requirements. Therefore, `list` operations on these collections will return all documents, which is the intended behavior and respects QAPs, as no user-specific filtering is required beyond basic authentication and role-based write access.\n\n**DBAC and Role Management:**\nThe `User` entity, stored at `/users/{userId}`, includes a `role` field (Student, Teacher, Admin). This centralizes role information in the database, enabling robust DBAC. Security rules will leverage this field to grant different permissions based on the user's role, fulfilling the explicit user requirement for role-based access on the authentication page."
+  }
+}
