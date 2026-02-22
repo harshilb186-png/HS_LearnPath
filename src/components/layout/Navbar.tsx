@@ -87,7 +87,7 @@ export function Navbar() {
           
           <div className="flex items-center gap-2">
             {isUserLoading ? (
-              <div className="h-11 w-11 rounded-2xl bg-secondary/40 animate-pulse border border-black/5 dark:border-white/10" />
+              <div className="h-11 w-11 rounded-2xl bg-secondary/40 animate-pulse border border-white/10" />
             ) : user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

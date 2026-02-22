@@ -34,19 +34,19 @@ export default function Home() {
       
       <main className="flex-1 container mx-auto px-4 py-12 space-y-16 max-w-7xl">
         <section className="relative group">
-          <div className="absolute -inset-1 bg-primary rounded-[3rem] blur-3xl opacity-5 group-hover:opacity-10 transition duration-1000"></div>
-          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-1 glass-card rounded-[3rem] overflow-hidden">
+          <div className="absolute -inset-1 bg-primary rounded-[3rem] blur-3xl opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-1 glass-card rounded-[3rem] overflow-hidden border-white/10">
             <div className="lg:col-span-8 relative min-h-[500px] flex flex-col justify-center p-12 overflow-hidden">
               <div className="absolute inset-0 z-0">
                 {heroImage && (
                   <img 
                     src={heroImage.imageUrl} 
                     alt={heroImage.description} 
-                    className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000"
+                    className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
                     data-ai-hint={heroImage.imageHint}
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent"></div>
               </div>
               
               <div className="relative z-10">
