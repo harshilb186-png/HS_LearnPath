@@ -49,7 +49,7 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent lg:bg-gradient-to-r lg:from-background lg:to-transparent flex flex-col justify-center p-12">
                 <Badge className="w-fit mb-6 bg-primary/20 text-primary border-primary/30 backdrop-blur-md px-4 py-1">
-                  <Sparkles className="w-3.5 h-3.5 mr-2 animate-pulse" /> HS LearnPath+ Version 2.0
+                  <Sparkles className="w-3.5 h-3.5 mr-2 animate-pulse" /> HS LearnPath+ Version 2.1
                 </Badge>
                 <h1 className="font-headline text-5xl md:text-7xl font-bold mb-6 leading-[1.1] tracking-tight text-white">
                   The Best Place To <br /><span className="text-primary italic">Build Your Future.</span>
@@ -72,23 +72,23 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary flex items-center gap-2">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent flex items-center gap-2">
                       <TrendingUp className="w-4 h-4" /> Global Progress
                     </p>
-                    <span className="text-sm font-bold text-primary">35%</span>
+                    <span className="text-sm font-bold text-accent">35%</span>
                   </div>
                   <Progress value={35} className="h-2 bg-white/5" />
                   <p className="text-xs text-muted-foreground italic opacity-70">"You're in the top 10% of active learners this week!"</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-5 glass-card rounded-2xl border-white/5">
+                  <div className="p-5 glass-card rounded-2xl border-white/5 flex flex-col items-center text-center">
                     <p className="text-3xl font-headline font-bold text-white mb-1">45</p>
                     <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Skills Tracked</p>
                   </div>
-                  <div className="p-5 glass-card rounded-2xl border-primary/20">
-                    <p className="text-3xl font-headline font-bold text-primary mb-1">12</p>
-                    <p className="text-[10px] text-primary/70 uppercase tracking-widest font-bold">Mastered</p>
+                  <div className="p-5 glass-card rounded-2xl border-accent/20 flex flex-col items-center text-center bg-accent/5">
+                    <p className="text-3xl font-headline font-bold text-accent mb-1">12</p>
+                    <p className="text-[10px] text-accent/70 uppercase tracking-widest font-bold">Mastered</p>
                   </div>
                 </div>
 
@@ -100,8 +100,8 @@ export default function Home() {
                       </CardTitle>
                       <p className="text-2xl font-headline font-bold text-white">5 Days</p>
                     </div>
-                    <div className="bg-primary/20 p-4 rounded-full group-hover/streak:scale-110 transition-transform">
-                      <Zap className="h-6 w-6 text-primary" />
+                    <div className="icon-plate purple group-hover/streak:scale-110 transition-transform">
+                      <Zap className="h-6 w-6" />
                     </div>
                   </CardContent>
                 </Card>
@@ -130,7 +130,7 @@ export default function Home() {
                       <div className="flex justify-between items-start mb-6">
                         <Badge variant="outline" className="px-3 py-1 bg-primary/10 text-primary border-primary/20">Active Path</Badge>
                         <span className="text-xs text-muted-foreground flex items-center gap-2 font-bold uppercase tracking-widest">
-                          <Clock className="w-3.5 h-3.5" /> Self-Paced
+                          <Clock className="w-3.5 h-3.5 text-accent" /> Self-Paced
                         </span>
                       </div>
                       <CardTitle className="text-2xl group-hover:text-primary transition-colors font-headline font-bold text-white mb-4">
@@ -141,7 +141,7 @@ export default function Home() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="p-8 pt-0">
-                      <Button asChild className="w-full cyber-button rounded-2xl font-bold h-12 bg-white/5 text-white hover:bg-primary">
+                      <Button asChild className="w-full cyber-button rounded-2xl font-bold h-12 bg-white/5 text-white hover:bg-primary transition-all">
                         <Link href={`/curriculum/${path.id}`} className="flex items-center gap-2">
                           Resume Learning <ArrowRight size={18} />
                         </Link>
@@ -150,7 +150,7 @@ export default function Home() {
                   </Card>
                 ))
               ) : (
-                <div className="col-span-2 p-16 text-center glass-card rounded-[2.5rem] border-dashed">
+                <div className="col-span-2 p-16 text-center glass-card rounded-[2.5rem] border-dashed border-white/10">
                    <p className="text-muted-foreground text-lg">Start exploring our curriculum to see your journeys here.</p>
                 </div>
               )}
@@ -164,8 +164,8 @@ export default function Home() {
                   <Video size={160} className="text-primary" />
                 </div>
                 <div className="flex items-center gap-4 mb-6 relative z-10">
-                   <div className="bg-primary/20 p-4 rounded-2xl">
-                     <Video className="text-primary h-6 w-6" />
+                   <div className="icon-plate purple">
+                     <Video className="h-6 w-6" />
                    </div>
                    <h3 className="font-headline font-bold text-2xl text-white">Live Lounge</h3>
                 </div>
@@ -175,32 +175,32 @@ export default function Home() {
                 </div>
               </Link>
 
-              <Link href="/assessment" className="group p-8 glass-card rounded-[2.5rem] hover:bg-secondary/20 transition-all block relative overflow-hidden">
+              <Link href="/assessment" className="group p-8 glass-card rounded-[2.5rem] hover:bg-accent/5 transition-all block relative overflow-hidden border-accent/10">
                  <div className="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-opacity -rotate-12">
-                  <UserCheck size={160} />
+                  <UserCheck size={160} className="text-accent" />
                 </div>
                 <div className="flex items-center gap-4 mb-6 relative z-10">
-                   <div className="bg-secondary p-4 rounded-2xl border border-white/5">
-                     <UserCheck className="text-white h-6 w-6" />
+                   <div className="icon-plate blue">
+                     <UserCheck className="h-6 w-6" />
                    </div>
                    <h3 className="font-headline font-bold text-2xl text-white">Skill Scan</h3>
                 </div>
                 <p className="text-muted-foreground mb-8 relative z-10 leading-relaxed">Map your current stack to your dream career path.</p>
-                <div className="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.3em] relative z-10">
+                <div className="flex items-center gap-2 text-accent font-bold text-xs uppercase tracking-[0.3em] relative z-10">
                   Analyze Now <ArrowRight size={14} />
                 </div>
               </Link>
             </div>
 
             <Card className="glass-card rounded-[2.5rem] border-primary/20 shadow-2xl overflow-hidden">
-              <div className="h-1 bg-primary w-1/2" />
+              <div className="h-1 bg-gradient-to-r from-primary to-accent w-full" />
               <CardHeader className="p-8">
                 <CardTitle className="flex items-center gap-3 text-lg font-headline text-white">
-                  <BrainCircuit className="w-5 h-5 text-primary" /> AI Insights
+                  <BrainCircuit className="w-5 h-5 text-accent" /> AI Insights
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-8 pt-0 space-y-8">
-                <div className="p-5 rounded-2xl bg-white/5 border border-white/5 relative overflow-hidden group">
+                <div className="p-5 rounded-2xl bg-secondary/40 border border-white/5 relative overflow-hidden group">
                   <p className="text-sm leading-relaxed text-muted-foreground font-medium">
                     "Based on your recent labs, I've prioritized <span className="text-primary font-bold">Cloud Security</span> in your custom roadmap."
                   </p>
@@ -209,12 +209,17 @@ export default function Home() {
                 <div className="space-y-4">
                   <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-muted-foreground/60 px-1">Milestones</h4>
                   {[
-                    { title: "Complete Docker Lab", date: "Today" },
-                    { title: "Portfolio Review", date: "Thu" },
+                    { title: "Complete Docker Lab", date: "Today", color: "purple" },
+                    { title: "Portfolio Review", date: "Thu", color: "blue" },
                   ].map((goal, idx) => (
                     <div key={idx} className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/5 transition-colors">
                       <span className="text-sm font-medium text-white">{goal.title}</span>
-                      <Badge variant="outline" className="text-[9px] uppercase font-bold border-primary/20 bg-primary/5 text-primary tracking-widest">{goal.date}</Badge>
+                      <Badge variant="outline" className={cn(
+                        "text-[9px] uppercase font-bold tracking-widest",
+                        goal.color === 'purple' ? "border-primary/20 bg-primary/5 text-primary" : "border-accent/20 bg-accent/5 text-accent"
+                      )}>
+                        {goal.date}
+                      </Badge>
                     </div>
                   ))}
                 </div>
