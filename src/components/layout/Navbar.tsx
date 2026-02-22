@@ -80,14 +80,12 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <ThemeToggle />
-          
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-accent transition-colors">
             <Bell size={20} />
           </Button>
           
           {isUserLoading ? (
-            <div className="h-11 w-11 rounded-2xl bg-secondary/40 animate-pulse border border-black/5 dark:border-white/5" />
+            <div className="h-11 w-11 rounded-2xl bg-secondary/40 animate-pulse border border-black/5 dark:border-white/10" />
           ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -133,6 +131,8 @@ export function Navbar() {
               </Link>
             </Button>
           )}
+
+          <ThemeToggle />
         </div>
       </div>
     </header>
