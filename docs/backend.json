@@ -1,3 +1,4 @@
+
 {
   "entities": {
     "User": {
@@ -282,6 +283,40 @@
         "moduleId",
         "status"
       ]
+    },
+    "Meeting": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Meeting",
+      "type": "object",
+      "description": "Represents a live meeting session between students and teachers.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the meeting."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the meeting."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the meeting started."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "ended"],
+          "description": "Current status of the meeting."
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "User IDs of people currently in the meeting."
+        }
+      },
+      "required": ["id", "title", "startTime", "status"]
     }
   },
   "auth": {
@@ -299,11 +334,11 @@
           "schema": {
             "$ref": "#/backend/entities/User"
           },
-          "description": "Stores individual user profiles and their assigned roles (Student, Teacher, Admin). This collection is fundamental for role-based access control (DBAC).",
+          "description": "Stores individual user profiles and their assigned roles.",
           "params": [
             {
               "name": "userId",
-              "description": "The unique identifier of the user, matching `request.auth.uid`."
+              "description": "The unique identifier of the user."
             }
           ]
         }
@@ -315,7 +350,7 @@
           "schema": {
             "$ref": "#/backend/entities/CareerPath"
           },
-          "description": "Defines various career trajectories. These are global and generally read-only for students/teachers, with write access for admins.",
+          "description": "Defines various career trajectories.",
           "params": [
             {
               "name": "careerPathId",
@@ -331,7 +366,7 @@
           "schema": {
             "$ref": "#/backend/entities/LearningPath"
           },
-          "description": "Structured collections of modules. These are global and generally read-only for students/teachers, with write access for admins.",
+          "description": "Structured collections of modules.",
           "params": [
             {
               "name": "learningPathId",
@@ -347,7 +382,7 @@
           "schema": {
             "$ref": "#/backend/entities/Module"
           },
-          "description": "Individual learning units within paths. These are global and generally read-only for students/teachers, with write access for admins.",
+          "description": "Individual learning units within paths.",
           "params": [
             {
               "name": "moduleId",
@@ -363,7 +398,7 @@
           "schema": {
             "$ref": "#/backend/entities/Skill"
           },
-          "description": "Definitions of competencies or abilities. These are global and generally read-only for students/teachers, with write access for admins.",
+          "description": "Definitions of competencies or abilities.",
           "params": [
             {
               "name": "skillId",
@@ -379,11 +414,11 @@
           "schema": {
             "$ref": "#/backend/entities/SkillAssessment"
           },
-          "description": "Records individual user's skill assessment results. Includes denormalized 'userId' for authorization independence.",
+          "description": "Records individual user's skill assessment results.",
           "params": [
             {
               "name": "userId",
-              "description": "The unique identifier of the user who owns this assessment, matching the parent path."
+              "description": "The unique identifier of the user who owns this assessment."
             },
             {
               "name": "skillAssessmentId",
@@ -399,11 +434,11 @@
           "schema": {
             "$ref": "#/backend/entities/UserModuleProgress"
           },
-          "description": "Tracks a specific user's progress through modules. Includes denormalized 'userId' for authorization independence.",
+          "description": "Tracks a specific user's progress through modules.",
           "params": [
             {
               "name": "userId",
-              "description": "The unique identifier of the user whose progress is being tracked, matching the parent path."
+              "description": "The unique identifier of the user whose progress is being tracked."
             },
             {
               "name": "userModuleProgressId",
@@ -411,8 +446,23 @@
             }
           ]
         }
+      },
+      {
+        "path": "/meetings/{meetingId}",
+        "definition": {
+          "entityName": "Meeting",
+          "schema": {
+            "$ref": "#/backend/entities/Meeting"
+          },
+          "description": "Active live meeting sessions.",
+          "params": [
+            {
+              "name": "meetingId",
+              "description": "Unique ID for the meeting session."
+            }
+          ]
+        }
       }
-    ],
-    "reasoning": "The recommended Firestore structure is designed with a strong emphasis on authorization independence, clear access patterns, and scalability for the LearnPath Pro application. \n\n**Authorization Independence:**\nFor user-specific data such as 'SkillAssessment' and 'UserModuleProgress', the data is nested under `/users/{userId}/`. This path-based ownership, combined with the explicit `userId` field within each document (`resource.data.userId`), makes authorization highly independent. Security rules for these collections will directly compare `request.auth.uid` with the `{userId}` wildcard in the path and the `userId` field in the document. This eliminates the need for expensive and complex `get()` calls to parent documents to determine ownership, ensuring atomic operations and simplifying rule debugging.\n\nFor global entities like 'CareerPath', 'LearningPath', 'Module', and 'Skill', authorization primarily depends on the requesting user's role (Student, Teacher, Admin). The user's role is stored directly in their `/users/{userId}` profile document. While security rules will perform a single `get()` operation to fetch the `request.auth.uid`'s role from `/users/$(request.auth.uid)`, this is a standard and performant pattern for Database Access Control (DBAC) and is not considered a hierarchical dependency breaking atomic operations, as it retrieves well-known, self-owned data.\n\n**QAPs (Rules are not Filters) and Structural Segregation:**\n1.  **User-Private Data:** Collections like `/users/{userId}/skillAssessments` and `/users/{userId}/userModuleProgress` are strictly segregated for individual users. This inherent path-based filtering ensures that `list` queries automatically adhere to QAPs. A user can only 'list' documents under their own `{userId}` path, preventing accidental data exposure and simplifying rules (e.g., `allow read: if request.auth.uid == userId;`).\n2.  **Global Content:** 'CareerPaths', 'LearningPaths', 'Modules', and 'Skills' are placed in top-level collections. These entities are intended to be globally accessible (read-only) to all authenticated users (Students, Teachers, Admins) and editable only by Admins. This segregation ensures a homogeneous security posture for each collection: all documents within these collections share the same access requirements. Therefore, `list` operations on these collections will return all documents, which is the intended behavior and respects QAPs, as no user-specific filtering is required beyond basic authentication and role-based write access.\n\n**DBAC and Role Management:**\nThe `User` entity, stored at `/users/{userId}`, includes a `role` field (Student, Teacher, Admin). This centralizes role information in the database, enabling robust DBAC. Security rules will leverage this field to grant different permissions based on the user's role, fulfilling the explicit user requirement for role-based access on the authentication page."
+    ]
   }
 }
