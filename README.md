@@ -9,11 +9,11 @@ HS LearnPath+ is a premium, AI-powered career curriculum mapping and social lear
 - **Assessment**: AI-driven skill gap analysis and career mapping.
 - **Meet**: Integrated live video lounge ("Career Lounge") for real-time workshops and peer discussion.
 
-## How to sync with your Git Repo
+## 🚀 Deployment & Git Sync
 
-To push the current state of **HS LearnPath+** to your repository, follow these steps in your terminal:
+To push the current state of **HS LearnPath+** to your repository, follow these steps in your IDE terminal:
 
-### 1. Initialize Git (If not already done)
+### 1. Initialize Git
 If this is the first time you are pushing this specific folder:
 ```bash
 git init
@@ -24,9 +24,10 @@ This command connects your local project to your GitHub repository.
 ```bash
 git remote add origin https://github.com/harshilb186-png/HS_LearnPath
 ```
-*If it says "remote origin already exists", use `git remote set-url origin https://github.com/harshilb186-png/HS_LearnPath` instead.*
+*Note: If it says "remote origin already exists", use:*
+`git remote set-url origin https://github.com/harshilb186-png/HS_LearnPath`
 
-### 3. Commit your changes
+### 3. Add and Commit your changes
 ```bash
 git add .
 git commit -m "Integrated HS LearnPath+ Cyber-Glass UI and Firebase features"
@@ -34,6 +35,7 @@ git commit -m "Integrated HS LearnPath+ Cyber-Glass UI and Firebase features"
 
 ### 4. Push to the main branch
 ```bash
+git branch -M main
 git push -u origin main
 ```
 
