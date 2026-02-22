@@ -2,10 +2,10 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-library",
-      "description": "Cozy BookTok library aesthetic with warm lighting and stacked books.",
-      "imageUrl": "https://picsum.photos/seed/booktok-library/1200/600",
-      "imageHint": "cozy library"
+      "id": "hero-car",
+      "description": "A high-end sports car in a modern, neon-lit garage environment.",
+      "imageUrl": "https://picsum.photos/seed/cyber-car/1200/600",
+      "imageHint": "sports car"
     },
     {
       "id": "career-path",
