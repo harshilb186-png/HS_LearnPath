@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -84,55 +85,57 @@ export function Navbar() {
             <Bell size={20} />
           </Button>
           
-          {isUserLoading ? (
-            <div className="h-11 w-11 rounded-2xl bg-secondary/40 animate-pulse border border-black/5 dark:border-white/10" />
-          ) : user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-11 w-11 rounded-2xl p-0 overflow-hidden ring-2 ring-transparent hover:ring-primary transition-all border border-black/5 dark:border-white/10 bg-secondary/40 dark:bg-secondary/80">
-                  <Avatar className="h-full w-full rounded-2xl">
-                    <AvatarImage src={`https://picsum.photos/seed/${user.uid}/64/64`} alt={user.email || 'User'} />
-                    <AvatarFallback className="bg-secondary"><UserIcon size={20} className="text-muted-foreground" /></AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-64 glass-card mt-3 rounded-2xl p-2" align="end" forceMount>
-                <DropdownMenuLabel className="font-normal p-4">
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-bold text-foreground leading-none tracking-tight">{user.displayName || user.email?.split('@')[0]}</p>
-                    <p className="text-[10px] leading-none text-muted-foreground font-mono opacity-60">{user.email}</p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-black/5 dark:bg-white/5 mx-2" />
-                <DropdownMenuItem asChild className="focus:bg-primary/10 p-3 rounded-xl cursor-pointer">
-                  <Link href="/profile" className="flex w-full items-center">
-                    <UserIcon className="mr-3 h-4 w-4 text-accent" />
-                    <span className="font-bold text-[10px] uppercase tracking-widest text-foreground">Profile</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="focus:bg-primary/10 p-3 rounded-xl cursor-pointer">
-                  <Link href="/settings" className="flex w-full items-center">
-                    <Settings className="mr-3 h-4 w-4 text-accent" />
-                    <span className="font-bold text-[10px] uppercase tracking-widest text-foreground">Settings</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-black/5 dark:bg-white/5 mx-2" />
-                <DropdownMenuItem onClick={handleSignOut} className="text-destructive focus:bg-destructive/10 p-3 rounded-xl cursor-pointer">
-                  <LogOut className="mr-3 h-4 w-4" />
-                  <span className="font-bold text-[10px] uppercase tracking-widest">Sign Out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <Button asChild className="cyber-button bg-primary hover:bg-primary/90 rounded-full px-8 font-bold h-12 shadow-primary/20">
-              <Link href="/auth" className="flex items-center gap-2">
-                <LogIn size={18} />
-                Sign In
-              </Link>
-            </Button>
-          )}
+          <div className="flex items-center gap-2">
+            {isUserLoading ? (
+              <div className="h-11 w-11 rounded-2xl bg-secondary/40 animate-pulse border border-black/5 dark:border-white/10" />
+            ) : user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-11 w-11 rounded-2xl p-0 overflow-hidden ring-2 ring-transparent hover:ring-primary transition-all border border-black/5 dark:border-white/10 bg-secondary/40 dark:bg-secondary/80">
+                    <Avatar className="h-full w-full rounded-2xl">
+                      <AvatarImage src={`https://picsum.photos/seed/${user.uid}/64/64`} alt={user.email || 'User'} />
+                      <AvatarFallback className="bg-secondary"><UserIcon size={20} className="text-muted-foreground" /></AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-64 glass-card mt-3 rounded-2xl p-2" align="end" forceMount>
+                  <DropdownMenuLabel className="font-normal p-4">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-bold text-foreground leading-none tracking-tight">{user.displayName || user.email?.split('@')[0]}</p>
+                      <p className="text-[10px] leading-none text-muted-foreground font-mono opacity-60">{user.email}</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator className="bg-black/5 dark:bg-white/5 mx-2" />
+                  <DropdownMenuItem asChild className="focus:bg-primary/10 p-3 rounded-xl cursor-pointer">
+                    <Link href="/profile" className="flex w-full items-center">
+                      <UserIcon className="mr-3 h-4 w-4 text-accent" />
+                      <span className="font-bold text-[10px] uppercase tracking-widest text-foreground">Profile</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="focus:bg-primary/10 p-3 rounded-xl cursor-pointer">
+                    <Link href="/settings" className="flex w-full items-center">
+                      <Settings className="mr-3 h-4 w-4 text-accent" />
+                      <span className="font-bold text-[10px] uppercase tracking-widest text-foreground">Settings</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="bg-black/5 dark:bg-white/5 mx-2" />
+                  <DropdownMenuItem onClick={handleSignOut} className="text-destructive focus:bg-destructive/10 p-3 rounded-xl cursor-pointer">
+                    <LogOut className="mr-3 h-4 w-4" />
+                    <span className="font-bold text-[10px] uppercase tracking-widest">Sign Out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button asChild className="cyber-button bg-primary hover:bg-primary/90 rounded-full px-8 font-bold h-12 shadow-primary/20">
+                <Link href="/auth" className="flex items-center gap-2">
+                  <LogIn size={18} />
+                  Sign In
+                </Link>
+              </Button>
+            )}
 
-          <ThemeToggle />
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>

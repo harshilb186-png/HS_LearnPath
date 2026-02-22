@@ -37,10 +37,10 @@ export default function Home() {
             <div className="lg:col-span-8 relative min-h-[500px] flex flex-col justify-center p-12 overflow-hidden">
               <div className="absolute inset-0 z-0">
                 <img 
-                  src="https://picsum.photos/seed/library-hero/1200/600" 
-                  alt="Atmospheric Library" 
-                  className="w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-1000"
-                  data-ai-hint="library books"
+                  src="https://picsum.photos/seed/booktok-cozy/1200/600" 
+                  alt="Cozy Library Aesthetic" 
+                  className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000"
+                  data-ai-hint="cozy books"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"></div>
               </div>
