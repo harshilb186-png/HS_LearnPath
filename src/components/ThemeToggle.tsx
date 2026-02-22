@@ -27,7 +27,7 @@ export function ThemeToggle() {
       variant="ghost" 
       size="icon" 
       onClick={toggleTheme}
-      className="relative text-muted-foreground hover:text-primary transition-all h-11 w-11 rounded-2xl border border-white/10 bg-secondary/40 dark:bg-secondary/80 backdrop-blur-md"
+      className="relative text-muted-foreground hover:text-primary transition-all h-11 w-11 rounded-2xl border border-black/5 dark:border-white/10 bg-secondary/40 dark:bg-secondary/80 backdrop-blur-md"
     >
       <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
       <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
