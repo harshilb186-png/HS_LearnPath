@@ -53,7 +53,7 @@ export default function Home() {
                 <Badge className="mb-6 bg-primary/20 text-primary border-primary/30 backdrop-blur-md px-4 py-1.5 rounded-full font-bold uppercase tracking-widest text-[10px]">
                   <Sparkles className="w-3.5 h-3.5 mr-2 animate-pulse" /> AI-Powered Growth
                 </Badge>
-                <h1 className="font-headline text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight text-white">
+                <h1 className="font-headline text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight text-foreground dark:text-white">
                   Navigate Your <br /><span className="text-primary italic">Career Legacy.</span>
                 </h1>
                 <p className="max-w-md text-lg text-muted-foreground mb-10 leading-relaxed font-medium">
@@ -63,7 +63,7 @@ export default function Home() {
                   <Button asChild size="lg" className="cyber-button bg-primary hover:bg-primary/90 rounded-full px-10 h-14 font-bold">
                     <Link href="/curriculum">Explore Catalog</Link>
                   </Button>
-                  <Button variant="outline" size="lg" className="cyber-button border-white/10 hover:bg-white/5 rounded-full px-10 h-14 font-bold text-white">
+                  <Button variant="outline" size="lg" className="cyber-button border-white/10 hover:bg-white/5 rounded-full px-10 h-14 font-bold dark:text-white">
                     <Link href="/assessment">Start Scan</Link>
                   </Button>
                 </div>
@@ -84,7 +84,7 @@ export default function Home() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-6 glass-card rounded-2xl flex flex-col items-center text-center">
-                    <p className="text-3xl font-headline font-bold text-white mb-1">45</p>
+                    <p className="text-3xl font-headline font-bold text-foreground dark:text-white mb-1">45</p>
                     <p className="text-[9px] text-muted-foreground uppercase tracking-[0.2em] font-bold">Skills</p>
                   </div>
                   <div className="p-6 glass-card rounded-2xl flex flex-col items-center text-center border-accent/20 bg-accent/5">
@@ -99,7 +99,7 @@ export default function Home() {
                       <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-primary flex items-center gap-2">
                         <Zap className="w-3.5 h-3.5 fill-primary" /> Daily Streak
                       </p>
-                      <p className="text-2xl font-headline font-bold text-white">5 Days</p>
+                      <p className="text-2xl font-headline font-bold text-foreground dark:text-white">5 Days</p>
                     </div>
                     <div className="icon-plate purple group-hover:scale-110 transition-transform">
                       <Zap className="h-5 w-5" />
@@ -114,7 +114,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           <div className="md:col-span-8 space-y-8">
             <div className="flex items-center justify-between px-2">
-              <h2 className="text-3xl font-headline font-bold text-white flex items-center gap-4">
+              <h2 className="text-3xl font-headline font-bold text-foreground dark:text-white flex items-center gap-4">
                 <PlayCircle className="w-8 h-8 text-primary" /> Active Journeys
               </h2>
               <Button variant="link" asChild className="text-primary hover:text-primary/80 font-bold uppercase text-[10px] tracking-widest">
@@ -133,7 +133,7 @@ export default function Home() {
                           <Clock className="w-3 h-3 text-accent" /> Self-Paced
                         </span>
                       </div>
-                      <CardTitle className="text-2xl font-headline font-bold text-white group-hover:text-primary transition-colors mb-4 line-clamp-1">
+                      <CardTitle className="text-2xl font-headline font-bold text-foreground dark:text-white group-hover:text-primary transition-colors mb-4 line-clamp-1">
                         {path.name}
                       </CardTitle>
                       <CardDescription className="text-sm leading-relaxed text-muted-foreground line-clamp-3">
@@ -141,7 +141,7 @@ export default function Home() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="p-8 pt-0">
-                      <Button asChild className="w-full cyber-button h-11 rounded-xl bg-white/5 text-white hover:bg-primary border border-white/5">
+                      <Button asChild className="w-full cyber-button h-11 rounded-xl bg-white/5 text-foreground dark:text-white hover:bg-primary border border-white/5">
                         <Link href={`/curriculum/${path.id}`} className="flex items-center gap-2">
                           Resume <ArrowRight size={16} />
                         </Link>
@@ -167,7 +167,7 @@ export default function Home() {
                    <div className="icon-plate purple p-2 h-10 w-10">
                      <Video size={18} />
                    </div>
-                   <h3 className="font-headline font-bold text-xl text-white">Live Lounge</h3>
+                   <h3 className="font-headline font-bold text-xl text-foreground dark:text-white">Live Lounge</h3>
                 </div>
                 <p className="text-sm text-muted-foreground mb-6 relative z-10 font-medium">Connect with peers in real-time collaborative workshops.</p>
                 <div className="flex items-center gap-2 text-primary font-bold text-[10px] uppercase tracking-[0.3em] relative z-10">
@@ -177,7 +177,7 @@ export default function Home() {
 
               <Card className="glass-card rounded-[2rem] border-primary/20 shadow-2xl overflow-hidden">
                 <CardHeader className="p-8 border-b border-white/5">
-                  <CardTitle className="flex items-center gap-3 text-sm font-bold uppercase tracking-[0.2em] text-white">
+                  <CardTitle className="flex items-center gap-3 text-sm font-bold uppercase tracking-[0.2em] text-foreground dark:text-white">
                     <BrainCircuit className="w-4 h-4 text-accent" /> AI Insights
                   </CardTitle>
                 </CardHeader>
@@ -190,7 +190,7 @@ export default function Home() {
                   <div className="space-y-4">
                     <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-muted-foreground/60 px-1">Upcoming</p>
                     <div className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/5 transition-colors">
-                      <span className="text-xs font-bold text-white">Docker Deep Dive</span>
+                      <span className="text-xs font-bold text-foreground dark:text-white">Docker Deep Dive</span>
                       <Badge variant="outline" className="border-primary/20 bg-primary/5 text-primary text-[8px] uppercase">Today</Badge>
                     </div>
                   </div>

@@ -53,7 +53,7 @@ export function Navbar() {
           <div className="bg-primary p-2.5 rounded-2xl text-primary-foreground shadow-[0_0_30px_rgba(168,85,247,0.4)] flex items-center justify-center">
             <GraduationCap size={24} />
           </div>
-          <span className="font-headline font-bold text-2xl tracking-tighter hidden sm:inline-block text-foreground uppercase italic text-white">
+          <span className="font-headline font-bold text-2xl tracking-tighter hidden sm:inline-block text-foreground uppercase italic dark:text-white">
             HS LearnPath<span className="text-primary">+</span>
           </span>
         </Link>
