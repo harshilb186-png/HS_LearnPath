@@ -8,11 +8,12 @@ To sync this workspace with your repository at `https://github.com/harshilb186-p
 
 ### Step 1: Initialize & Connect
 ```bash
-# Initialize git
+# Initialize git (if you haven't already)
 git init
 
 # Connect to your GitHub repository
-git remote add origin https://github.com/harshilb186-png/HS_LearnPath
+# Note: If it says "remote origin already exists", skip this or use 'set-url'
+git remote add origin https://github.com/harshilb186-png/HS_LearnPath || git remote set-url origin https://github.com/harshilb186-png/HS_LearnPath
 
 # Add all the files
 git add .
@@ -20,11 +21,9 @@ git add .
 # Save the changes locally
 git commit -m "Migrated to Next.js 15 Cyber-Glass UI and integrated Firebase/GenAI"
 
-# Push to your GitHub
+# Push to your GitHub and set the upstream branch
 git push -u origin main --force
 ```
-
-*Note: If it says "remote origin already exists", use:* `git remote set-url origin https://github.com/harshilb186-png/HS_LearnPath`
 
 ### Step 2: Download to your Computer (Clone)
 Once Step 1 is done, go to your local computer's terminal and run:
