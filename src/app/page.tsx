@@ -36,7 +36,6 @@ export default function Home() {
       <Navbar />
       
       <main className="flex-1 container mx-auto px-4 py-12 space-y-16 max-w-7xl">
-        {/* Welcome Section */}
         <section className="relative group">
           <div className="absolute -inset-1 bg-primary rounded-[2rem] blur-2xl opacity-10 group-hover:opacity-20 transition duration-1000"></div>
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-1 glass-card rounded-[2rem] p-1">
@@ -110,7 +109,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Pillar Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="md:col-span-8 space-y-10">
             <div className="flex items-center justify-between px-2">
