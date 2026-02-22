@@ -1,48 +1,47 @@
 # HS LearnPath+
 
-HS LearnPath+ is a premium, AI-powered career curriculum mapping and social learning platform. It features a "Cyber-Glass" aesthetic and deep integration with Firebase for real-time collaboration.
+HS LearnPath+ is a premium, AI-powered career curriculum mapping and social learning platform. It uses **Next.js 15** for high performance and deep integration with Firebase and Genkit.
 
-## Features
+## 📁 Folder Structure Mapping
+If you are coming from a Vite project (like the one in your screenshot), here is where my files belong:
 
-- **Dashboard**: High-impact metrics, activity streaks, and AI strategy feed.
-- **Curriculum**: Real-time course catalog with role-based access control for Students, Teachers, and Admins.
-- **Assessment**: AI-driven skill gap analysis and career mapping.
-- **Meet**: Integrated live video lounge ("Career Lounge") for real-time workshops and peer discussion.
+| Your Vite Structure | HS LearnPath+ (Next.js) | Description |
+| :--- | :--- | :--- |
+| `src/pages/` | `src/app/` | Next.js App Router uses the `app` folder for routes. |
+| `src/App.tsx` | `src/app/layout.tsx` | Global layout, navbar, and providers. |
+| `src/styles.css` | `src/app/globals.css` | The "Cyber-Glass" Tailwind theme variables. |
+| `index.tsx` | `src/app/page.tsx` | The entry point for your Home dashboard. |
+| `vite.config.ts` | `next.config.ts` | The configuration file for the Next.js framework. |
 
-## 🚀 Deployment & Git Sync
+## 🚀 How to Sync with GitHub
+Since you already have an existing repository at `https://github.com/harshilb186-png/HS_LearnPath`, follow these steps in your terminal to overwrite your local Vite code with this new Next.js version:
 
-To push the current state of **HS LearnPath+** to your repository, follow these steps in your IDE terminal:
-
-### 1. Initialize Git
-If this is the first time you are pushing this specific folder:
+### 1. Initialize and Connect
 ```bash
 git init
-```
-
-### 2. Connect to your Remote Repo
-This command connects your local project to your GitHub repository.
-```bash
 git remote add origin https://github.com/harshilb186-png/HS_LearnPath
 ```
 *Note: If it says "remote origin already exists", use:*
 `git remote set-url origin https://github.com/harshilb186-png/HS_LearnPath`
 
-### 3. Add and Commit your changes
+### 2. Pull existing code (to avoid conflicts)
 ```bash
-git add .
-git commit -m "Integrated HS LearnPath+ Cyber-Glass UI and Firebase features"
+git pull origin main --rebase
 ```
 
-### 4. Push to the main branch
+### 3. Add and Commit this new structure
 ```bash
-git branch -M main
+git add .
+git commit -m "Migrated to Next.js 15 Cyber-Glass UI and integrated Firebase/GenAI"
+```
+
+### 4. Push to GitHub
+```bash
 git push -u origin main
 ```
 
 ## Tech Stack
-
 - **Framework**: Next.js 15 (App Router)
-- **Styling**: Tailwind CSS, Lucide Icons, and "Cyber-Glass" Glassmorphism
+- **Styling**: Tailwind CSS, Lucide Icons, Cyber-Glass Morphism
 - **Backend**: Firebase (Auth, Firestore)
 - **AI**: Genkit (Gemini 2.5 Flash)
-- **UI Components**: Radix UI & ShadCN
