@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -53,6 +52,7 @@ export default function AuthPage() {
         updatedAt: new Date().toISOString(),
       };
 
+      // Non-blocking write
       setDoc(userRef, profileData)
         .catch((err) => {
           const permissionError = new FirestorePermissionError({
@@ -120,11 +120,11 @@ export default function AuthPage() {
           <CardContent>
             <Tabs defaultValue="login" className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-8 bg-white/5 p-1 rounded-full">
-                <TabsTrigger value="login" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-white">Login</TabsTrigger>
-                <TabsTrigger value="register" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-white">Register</TabsTrigger>
+                <TabsTrigger value="login" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-white transition-all">Login</TabsTrigger>
+                <TabsTrigger value="register" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-white transition-all">Register</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="login">
+              <TabsContent value="login" className="space-y-4 animate-in fade-in zoom-in-95 duration-300">
                 <form onSubmit={handleSignIn} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
@@ -134,7 +134,7 @@ export default function AuthPage() {
                         id="email" 
                         type="email" 
                         placeholder="name@example.com" 
-                        className="pl-10 bg-white/5 border-white/10"
+                        className="pl-10 bg-white/5 border-white/10 focus:border-primary"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required 
@@ -148,20 +148,20 @@ export default function AuthPage() {
                       <Input 
                         id="password" 
                         type="password" 
-                        className="pl-10 bg-white/5 border-white/10"
+                        className="pl-10 bg-white/5 border-white/10 focus:border-primary"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required 
                       />
                     </div>
                   </div>
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 py-6" disabled={isLoading}>
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 py-6 text-lg font-bold shadow-lg shadow-primary/20" disabled={isLoading}>
                     {isLoading ? <Loader2 className="animate-spin" /> : "Sign In"}
                   </Button>
                 </form>
               </TabsContent>
 
-              <TabsContent value="register">
+              <TabsContent value="register" className="space-y-4 animate-in fade-in zoom-in-95 duration-300">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="reg-username">Username</Label>
@@ -170,7 +170,7 @@ export default function AuthPage() {
                       <Input 
                         id="reg-username" 
                         placeholder="johndoe" 
-                        className="pl-10 bg-white/5 border-white/10"
+                        className="pl-10 bg-white/5 border-white/10 focus:border-primary"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required 
@@ -185,7 +185,7 @@ export default function AuthPage() {
                         id="reg-email" 
                         type="email" 
                         placeholder="name@example.com" 
-                        className="pl-10 bg-white/5 border-white/10"
+                        className="pl-10 bg-white/5 border-white/10 focus:border-primary"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required 
@@ -199,7 +199,7 @@ export default function AuthPage() {
                       <Input 
                         id="reg-password" 
                         type="password" 
-                        className="pl-10 bg-white/5 border-white/10"
+                        className="pl-10 bg-white/5 border-white/10 focus:border-primary"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required 
@@ -208,7 +208,7 @@ export default function AuthPage() {
                   </div>
 
                   <div className="space-y-3 pt-2">
-                    <Label>I am a...</Label>
+                    <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-1">I am a...</Label>
                     <RadioGroup 
                       defaultValue="Student" 
                       onValueChange={(v) => setRole(v as any)}
@@ -218,43 +218,43 @@ export default function AuthPage() {
                         <RadioGroupItem value="Student" id="role-student" className="peer sr-only" />
                         <Label
                           htmlFor="role-student"
-                          className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-white/5 p-4 hover:bg-white/10 peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-primary cursor-pointer transition-all"
+                          className="flex flex-col items-center justify-between rounded-xl border-2 border-white/5 bg-white/5 p-4 hover:bg-white/10 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary cursor-pointer transition-all"
                         >
                           <GraduationCap className="mb-2 h-6 w-6" />
-                          <span className="text-xs font-semibold">Student</span>
+                          <span className="text-[10px] font-bold uppercase tracking-tight">Student</span>
                         </Label>
                       </div>
                       <div>
                         <RadioGroupItem value="Teacher" id="role-teacher" className="peer sr-only" />
                         <Label
                           htmlFor="role-teacher"
-                          className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-white/5 p-4 hover:bg-white/10 peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-primary cursor-pointer transition-all"
+                          className="flex flex-col items-center justify-between rounded-xl border-2 border-white/5 bg-white/5 p-4 hover:bg-white/10 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary cursor-pointer transition-all"
                         >
                           <Briefcase className="mb-2 h-6 w-6" />
-                          <span className="text-xs font-semibold">Teacher</span>
+                          <span className="text-[10px] font-bold uppercase tracking-tight">Teacher</span>
                         </Label>
                       </div>
                       <div>
                         <RadioGroupItem value="Admin" id="role-admin" className="peer sr-only" />
                         <Label
                           htmlFor="role-admin"
-                          className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-white/5 p-4 hover:bg-white/10 peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-primary cursor-pointer transition-all"
+                          className="flex flex-col items-center justify-between rounded-xl border-2 border-white/5 bg-white/5 p-4 hover:bg-white/10 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary cursor-pointer transition-all"
                         >
                           <ShieldCheck className="mb-2 h-6 w-6" />
-                          <span className="text-xs font-semibold">Admin</span>
+                          <span className="text-[10px] font-bold uppercase tracking-tight">Admin</span>
                         </Label>
                       </div>
                     </RadioGroup>
                   </div>
 
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 py-6 mt-4" disabled={isLoading}>
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 py-6 mt-4 text-lg font-bold shadow-lg shadow-primary/20" disabled={isLoading}>
                     {isLoading ? <Loader2 className="animate-spin" /> : "Create Account"}
                   </Button>
                 </form>
               </TabsContent>
             </Tabs>
           </CardContent>
-          <CardFooter className="justify-center text-xs text-muted-foreground">
+          <CardFooter className="justify-center text-xs text-muted-foreground border-t border-white/5 pt-4">
             By continuing, you agree to our Terms of Service.
           </CardFooter>
         </Card>

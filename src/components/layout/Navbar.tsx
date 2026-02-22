@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -122,7 +121,7 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button asChild variant="primary" size="sm" className="rounded-full px-6">
+            <Button asChild variant="default" size="sm" className="bg-primary hover:bg-primary/90 rounded-full px-6 font-bold shadow-lg shadow-primary/20">
               <Link href="/auth" className="flex items-center gap-2">
                 <LogIn size={16} />
                 Login
