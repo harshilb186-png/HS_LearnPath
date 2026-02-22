@@ -2,21 +2,20 @@
 
 HS LearnPath+ is a premium, AI-powered career curriculum mapping and social learning platform built with **Next.js 15**, **Firebase**, and **Genkit**.
 
-## 🚀 Quick Push to GitHub
+## 🚀 Quick Sync & Push to GitHub
 
-Run these commands in your terminal to sync this workspace with your repository at `https://github.com/harshilb186-png/HS_LearnPath`:
+If you see a "Can't push refs" error, it means your local code is out of sync with GitHub. Run these commands:
 
 ```bash
-# 1. Initialize and link
-git init
-git remote add origin https://github.com/harshilb186-png/HS_LearnPath || git remote set-url origin https://github.com/harshilb186-png/HS_LearnPath
+# 1. Pull latest changes from GitHub
+git pull origin main --rebase
 
-# 2. Stage and Save
+# 2. Stage and Save your work
 git add .
-git commit -m "Migration to Next.js 15 Cyber-Glass UI"
+git commit -m "Integrated latest AI curriculum and UI updates"
 
-# 3. Push (Sets upstream automatically)
-git push -u origin main --force
+# 3. Push to GitHub
+git push origin main
 ```
 
 ## 💻 Local Development
@@ -25,7 +24,8 @@ Once pushed, you can run it locally:
 2. `npm install`
 3. `npm run dev`
 
-## 📁 Migration Note
-- **Vite `src/pages`** -> Moved to **Next.js `src/app`**
-- **Vite `src/App.tsx`** -> Moved to **Next.js `src/app/layout.tsx`**
-- **Vite `index.html`** -> Handled by **Next.js `layout.tsx`** and `page.tsx`
+## 📁 Project Features
+- **AI Skill Mapping**: Compare your skills against industry benchmarks.
+- **Dynamic Curriculum**: Structured learning journeys powered by AI summaries.
+- **Cyber-Glass UI**: A high-fidelity, responsive interface with Dark/Light mode.
+- **Live Lounge**: Collaborative video workshops for peer learning.
