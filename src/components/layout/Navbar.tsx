@@ -11,7 +11,8 @@ import {
   Bell, 
   LogOut,
   User as UserIcon,
-  LogIn
+  LogIn,
+  Video
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ const NAV_ITEMS = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
   { name: "Curriculum", href: "/curriculum", icon: BookOpen },
   { name: "Assessment", href: "/assessment", icon: UserCheck },
+  { name: "Meet", href: "/meet", icon: Video },
 ];
 
 export function Navbar() {
@@ -54,7 +56,7 @@ export function Navbar() {
           </span>
         </Link>
 
-        <nav className="flex items-center bg-white/5 p-1 rounded-full border border-white/10">
+        <nav className="flex items-center bg-white/5 p-1 rounded-full border border-white/10 mx-4">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
@@ -63,14 +65,14 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300",
+                  "flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300",
                   isActive 
                     ? "bg-primary text-white shadow-lg shadow-primary/20" 
                     : "text-muted-foreground hover:text-primary hover:bg-white/5"
                 )}
               >
                 <Icon size={16} />
-                <span className="hidden md:inline">{item.name}</span>
+                <span className="hidden lg:inline">{item.name}</span>
               </Link>
             );
           })}
