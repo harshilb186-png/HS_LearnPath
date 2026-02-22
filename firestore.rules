@@ -1,80 +1,25 @@
-
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    /**
-     * HS LEARNPATH+ SECURITY RULES
-     */
-
-    // --- GLOBAL HELPER FUNCTIONS ---
-
     function isSignedIn() {
       return request.auth != null;
-    }
-
-    function isOwner(userId) {
-      return isSignedIn() && request.auth.uid == userId;
-    }
-
-    function isExistingOwner(userId) {
-      return resource != null && isOwner(userId);
     }
 
     function getUserRole() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
     }
 
-    function isAdmin() {
-      return isSignedIn() && getUserRole() == 'Admin';
-    }
-
     function isStaff() {
       return isSignedIn() && (getUserRole() == 'Admin' || getUserRole() == 'Teacher');
     }
 
-    // --- COLLECTION RULES ---
-
     match /users/{userId} {
-      allow get: if isOwner(userId) || isAdmin();
-      allow list: if isAdmin();
-      allow create: if isOwner(userId);
-      allow update: if isExistingOwner(userId) && request.resource.data.role == resource.data.role;
-      allow delete: if isAdmin();
+      allow read, write: if request.auth.uid == userId;
     }
 
-    match /careerPaths/{careerPathId} {
-      allow get, list: if true; 
-      allow create, update, delete: if isStaff();
-    }
-
-    match /learningPaths/{learningPathId} {
-      allow get, list: if true; 
-      allow create, update, delete: if isStaff();
-    }
-
-    match /modules/{moduleId} {
-      allow get, list: if true; 
-      allow create, update, delete: if isStaff();
-    }
-
-    match /skills/{skillId} {
-      allow get, list: if true; 
-      allow create, update, delete: if isStaff();
-    }
-
-    match /users/{userId}/skillAssessments/{assessmentId} {
-      allow get, list: if isOwner(userId);
-      allow create: if isOwner(userId) && request.resource.data.userId == userId;
-      allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
-      allow delete: if isExistingOwner(userId);
-    }
-
-    match /users/{userId}/userModuleProgress/{progressId} {
-      allow get, list: if isOwner(userId);
-      allow create: if isOwner(userId) && request.resource.data.userId == userId;
-      allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
-      allow delete: if isExistingOwner(userId);
+    match /learningPaths/{pathId} {
+      allow read: if true;
+      allow write: if isStaff();
     }
 
     match /meetings/{meetingId} {

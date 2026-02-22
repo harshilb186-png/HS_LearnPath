@@ -18,15 +18,12 @@ import {
   Sparkles
 } from "lucide-react";
 import Link from "next/link";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { cn } from "@/lib/utils";
 import { useUser, useCollection, useMemoFirebase, useFirestore } from "@/firebase";
 import { collection, query, limit } from "firebase/firestore";
 
 export default function Home() {
   const { user } = useUser();
   const db = useFirestore();
-  const heroImage = PlaceHolderImages.find(img => img.id === 'hero-learning');
 
   const lpQuery = useMemoFirebase(() => query(collection(db, "learningPaths"), limit(3)), [db]);
   const { data: recentPaths } = useCollection(lpQuery);
@@ -37,18 +34,18 @@ export default function Home() {
       
       <main className="flex-1 container mx-auto px-4 py-12 space-y-16 max-w-7xl">
         <section className="relative group">
-          <div className="absolute -inset-1 bg-primary rounded-[2rem] blur-2xl opacity-10 group-hover:opacity-20 transition duration-1000"></div>
-          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-1 glass-card rounded-[2rem] p-1">
-            <div className="lg:col-span-8 relative h-[500px] rounded-[1.8rem] overflow-hidden">
+          <div className="absolute -inset-1 bg-primary rounded-[3rem] blur-2xl opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-1 glass-card rounded-[3rem] p-1">
+            <div className="lg:col-span-8 relative h-[500px] rounded-[2.8rem] overflow-hidden">
               <img 
-                src={heroImage?.imageUrl} 
+                src="https://picsum.photos/seed/learn-1/1200/600" 
                 alt="Hero" 
                 className="w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-110"
                 data-ai-hint="learning education"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent lg:bg-gradient-to-r lg:from-background lg:to-transparent flex flex-col justify-center p-12">
                 <Badge className="w-fit mb-6 bg-primary/20 text-primary border-primary/30 backdrop-blur-md px-4 py-1">
-                  <Sparkles className="w-3.5 h-3.5 mr-2 animate-pulse" /> HS LearnPath+ Version 2.1
+                  <Sparkles className="w-3.5 h-3.5 mr-2 animate-pulse" /> HS LearnPath+ Professional
                 </Badge>
                 <h1 className="font-headline text-5xl md:text-7xl font-bold mb-6 leading-[1.1] tracking-tight text-white">
                   The Best Place To <br /><span className="text-primary italic">Build Your Future.</span>
@@ -60,7 +57,7 @@ export default function Home() {
                   <Button asChild size="lg" className="cyber-button bg-primary hover:bg-primary/90 rounded-full px-10 h-14 font-bold text-lg">
                     <Link href="/curriculum">Get Started</Link>
                   </Button>
-                  <Button variant="outline" size="lg" className="cyber-button bg-white/5 border-white/10 hover:bg-white/10 rounded-full px-10 h-14 font-bold text-lg">
+                  <Button variant="outline" size="lg" className="cyber-button bg-white/5 border-white/10 hover:bg-white/10 rounded-full px-10 h-14 font-bold text-lg text-white">
                     <Link href="/assessment">Learn More</Link>
                   </Button>
                 </div>
@@ -123,7 +120,7 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {recentPaths && recentPaths.length > 0 ? (
                 recentPaths.map((path) => (
-                  <Card key={path.id} className="group glass-card hover:bg-white/[0.06] transition-all duration-500 rounded-[2rem] border-white/5">
+                  <Card key={path.id} className="group glass-card hover:bg-white/[0.06] transition-all duration-500 rounded-[2.5rem] border-white/5">
                     <CardHeader className="p-8">
                       <div className="flex justify-between items-start mb-6">
                         <Badge variant="outline" className="px-3 py-1 bg-primary/10 text-primary border-primary/20">Active Path</Badge>
@@ -148,7 +145,7 @@ export default function Home() {
                   </Card>
                 ))
               ) : (
-                <div className="col-span-2 p-16 text-center glass-card rounded-[2.5rem] border-dashed border-white/10">
+                <div className="col-span-2 p-16 text-center glass-card rounded-[3rem] border-dashed border-white/10">
                    <p className="text-muted-foreground text-lg">Start exploring our curriculum to see your journeys here.</p>
                 </div>
               )}
@@ -212,10 +209,7 @@ export default function Home() {
                   ].map((goal, idx) => (
                     <div key={idx} className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/5 transition-colors">
                       <span className="text-sm font-medium text-white">{goal.title}</span>
-                      <Badge variant="outline" className={cn(
-                        "text-[9px] uppercase font-bold tracking-widest",
-                        goal.color === 'purple' ? "border-primary/20 bg-primary/5 text-primary" : "border-accent/20 bg-accent/5 text-accent"
-                      )}>
+                      <Badge variant="outline" className={goal.color === 'purple' ? "border-primary/20 bg-primary/5 text-primary text-[9px] uppercase" : "border-accent/20 bg-accent/5 text-accent text-[9px] uppercase"}>
                         {goal.date}
                       </Badge>
                     </div>
