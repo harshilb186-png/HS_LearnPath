@@ -43,22 +43,22 @@ service cloud.firestore {
     }
 
     match /careerPaths/{careerPathId} {
-      allow get, list: if isSignedIn();
+      allow get, list: if true; // Public catalog access
       allow create, update, delete: if isStaff();
     }
 
     match /learningPaths/{learningPathId} {
-      allow get, list: if isSignedIn();
+      allow get, list: if true; // Public catalog access
       allow create, update, delete: if isStaff();
     }
 
     match /modules/{moduleId} {
-      allow get, list: if isSignedIn();
+      allow get, list: if true; // Public catalog access
       allow create, update, delete: if isStaff();
     }
 
     match /skills/{skillId} {
-      allow get, list: if isSignedIn();
+      allow get, list: if true; // Public catalog access
       allow create, update, delete: if isStaff();
     }
 
