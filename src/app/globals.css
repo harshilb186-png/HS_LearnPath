@@ -1,28 +1,29 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 98%;
-    --card-foreground: 240 10% 3.9%;
+    --background: 240 10% 98%;
+    --foreground: 240 10% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 270 70% 60%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --popover-foreground: 240 10% 10%;
+    --primary: 270 70% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 90%;
+    --secondary-foreground: 240 10% 10%;
+    --muted: 240 5% 95%;
+    --muted-foreground: 240 5% 45%;
     --accent: 210 100% 50%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 270 70% 60%;
+    --border: 240 5% 85%;
+    --input: 240 5% 85%;
+    --ring: 270 70% 50%;
     --radius: 1.25rem;
   }
 
@@ -67,12 +68,6 @@
   @apply bg-white/[0.7] border-black/[0.05] shadow-[0_8px_32px_rgba(0,0,0,0.05)];
 }
 
-.glass-card::after {
-  content: '';
-  @apply absolute inset-0 rounded-[inherit] pointer-events-none;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, transparent 100%);
-}
-
 .hero-glow {
   @apply transition-colors duration-700;
 }
@@ -86,28 +81,15 @@
 .light .hero-glow {
   background: radial-gradient(circle at 50% -20%, hsla(270, 70%, 60%, 0.08), transparent 70%),
               radial-gradient(circle at 0% 100%, hsla(210, 100%, 50%, 0.04), transparent 50%),
-              hsl(0, 0%, 100%);
+              hsl(240, 10%, 98%);
 }
 
 .cyber-button {
   @apply transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg;
 }
 
-.dark .cyber-button { @apply shadow-primary/20; }
-.light .cyber-button { @apply shadow-primary/10; }
-
 .icon-plate {
   @apply bg-secondary/80 p-3 rounded-2xl border flex items-center justify-center transition-all duration-300;
-}
-
-.dark .icon-plate {
-  @apply border-white/5;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.light .icon-plate {
-  @apply border-black/5 bg-white/80;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .icon-plate.purple { @apply text-primary bg-gradient-to-br from-secondary to-primary/10 border-primary/20; }

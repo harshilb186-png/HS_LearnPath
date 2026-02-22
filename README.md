@@ -2,20 +2,15 @@
 
 HS LearnPath+ is a premium, AI-powered career curriculum mapping and social learning platform built with **Next.js 15**, **Firebase**, and **Genkit**.
 
-## 🚀 Quick Sync & Push to GitHub
-
-If you see a "Can't push refs" error, it means your local code is out of sync with GitHub. Run these commands:
+## 🚀 Fix: "Can't Push Refs" Error
+If you see the "Can't push refs to remote" error in Firebase Studio, it means your local code is out of sync with GitHub. Run these exact commands in your terminal:
 
 ```bash
-# 1. Pull latest changes from GitHub
+# 1. Pull and rebase to integrate remote changes
 git pull origin main --rebase
 
-# 2. Stage and Save your work
-git add .
-git commit -m "Integrated latest AI curriculum and UI updates"
-
-# 3. Push to GitHub
-git push origin main
+# 2. Force push your integrated changes
+git push origin main --force
 ```
 
 ## 💻 Local Development

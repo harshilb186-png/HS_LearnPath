@@ -80,14 +80,14 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-accent transition-colors">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-accent transition-colors hidden sm:flex">
             <Bell size={20} />
           </Button>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {isUserLoading ? (
-              <div className="h-11 w-11 rounded-2xl bg-secondary/40 animate-pulse border border-white/10" />
+              <div className="h-11 w-11 rounded-2xl bg-secondary/40 animate-pulse border border-black/5 dark:border-white/10" />
             ) : user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
