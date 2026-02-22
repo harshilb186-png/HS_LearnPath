@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Navbar } from "@/components/layout/Navbar";
@@ -36,10 +37,10 @@ export default function Home() {
             <div className="lg:col-span-8 relative min-h-[500px] flex flex-col justify-center p-12 overflow-hidden">
               <div className="absolute inset-0 z-0">
                 <img 
-                  src="https://picsum.photos/seed/learn-1/1200/600" 
-                  alt="Hero" 
+                  src="https://picsum.photos/seed/library-hero/1200/600" 
+                  alt="Atmospheric Library" 
                   className="w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-1000"
-                  data-ai-hint="learning education"
+                  data-ai-hint="library books"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"></div>
               </div>
@@ -52,7 +53,7 @@ export default function Home() {
                   Navigate Your <br /><span className="text-primary italic">Career Legacy.</span>
                 </h1>
                 <p className="max-w-md text-lg text-muted-foreground mb-10 leading-relaxed font-medium">
-                  A high-fidelity learning environment designed for precision-mapping your professional future.
+                  A high-fidelity learning environment designed for precision-mapping your professional future through curated wisdom.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Button asChild size="lg" className="cyber-button bg-primary hover:bg-primary/90 rounded-full px-10 h-14 font-bold">

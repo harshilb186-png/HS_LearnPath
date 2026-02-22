@@ -2,10 +2,10 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-learning",
-      "description": "A student learning online with a laptop and books.",
-      "imageUrl": "https://picsum.photos/seed/learn-1/1200/600",
-      "imageHint": "learning education"
+      "id": "hero-library",
+      "description": "A cozy, atmospheric library with tall bookshelves and warm lighting.",
+      "imageUrl": "https://picsum.photos/seed/library-hero/1200/600",
+      "imageHint": "library books"
     },
     {
       "id": "career-path",
