@@ -13,18 +13,20 @@ import {
   BrainCircuit,
   PlayCircle,
   Video,
-  UserCheck,
   Sparkles,
   Clock
 } from "lucide-react";
 import Link from "next/link";
 import { useCollection, useMemoFirebase, useFirestore } from "@/firebase";
 import { collection, query, limit } from "firebase/firestore";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export default function Home() {
   const db = useFirestore();
   const lpQuery = useMemoFirebase(() => query(collection(db, "learningPaths"), limit(3)), [db]);
   const { data: recentPaths } = useCollection(lpQuery);
+
+  const heroImage = PlaceHolderImages.find(img => img.id === 'hero-library');
 
   return (
     <div className="min-h-screen flex flex-col bg-background hero-glow">
@@ -36,12 +38,14 @@ export default function Home() {
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-1 glass-card rounded-[3rem] overflow-hidden">
             <div className="lg:col-span-8 relative min-h-[500px] flex flex-col justify-center p-12 overflow-hidden">
               <div className="absolute inset-0 z-0">
-                <img 
-                  src="https://picsum.photos/seed/booktok-cozy/1200/600" 
-                  alt="Cozy Library Aesthetic" 
-                  className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000"
-                  data-ai-hint="cozy books"
-                />
+                {heroImage && (
+                  <img 
+                    src={heroImage.imageUrl} 
+                    alt={heroImage.description} 
+                    className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000"
+                    data-ai-hint={heroImage.imageHint}
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"></div>
               </div>
               

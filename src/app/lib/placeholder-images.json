@@ -3,9 +3,9 @@
   "placeholderImages": [
     {
       "id": "hero-library",
-      "description": "Cozy book aesthetic with warm tones, headphones, and autumn leaves.",
-      "imageUrl": "https://picsum.photos/seed/booktok-cozy/1200/600",
-      "imageHint": "cozy books"
+      "description": "Cozy BookTok library aesthetic with warm lighting and stacked books.",
+      "imageUrl": "https://picsum.photos/seed/booktok-library/1200/600",
+      "imageHint": "cozy library"
     },
     {
       "id": "career-path",
