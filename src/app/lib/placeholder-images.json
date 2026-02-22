@@ -2,10 +2,10 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-car",
-      "description": "A high-end sports car in a modern, neon-lit garage environment.",
-      "imageUrl": "https://picsum.photos/seed/cyber-car/1200/600",
-      "imageHint": "sports car"
+      "id": "hero-library",
+      "description": "A cozy, aesthetic library with warm lighting and rows of books.",
+      "imageUrl": "https://picsum.photos/seed/library-aesthetic/1200/600",
+      "imageHint": "aesthetic library"
     },
     {
       "id": "career-path",

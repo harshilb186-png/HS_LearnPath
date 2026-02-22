@@ -26,7 +26,7 @@ export default function Home() {
   const lpQuery = useMemoFirebase(() => query(collection(db, "learningPaths"), limit(3)), [db]);
   const { data: recentPaths } = useCollection(lpQuery);
 
-  const heroImage = PlaceHolderImages.find(img => img.id === 'hero-car');
+  const heroImage = PlaceHolderImages.find(img => img.id === 'hero-library');
 
   return (
     <div className="min-h-screen flex flex-col bg-background hero-glow">
