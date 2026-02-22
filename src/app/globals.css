@@ -4,31 +4,37 @@
 
 @layer base {
   :root {
-    --background: 222 47% 4%;
-    --foreground: 213 31% 91%;
-    --card: 222 47% 4%;
-    --card-foreground: 213 31% 91%;
-    --popover: 222 47% 4%;
-    --popover-foreground: 215 20.2% 65.1%;
-    --primary: 263 70% 50%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217 33% 12%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 12%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217 33% 12%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 12%;
-    --input: 217 33% 12%;
-    --ring: 263 70% 50%;
-    --radius: 0.75rem;
-    --chart-1: 263 70% 50%;
-    --chart-2: 174 100% 29%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    /* Deeper, more atmospheric dark palette */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Vibrant Cyber Purple */
+    --primary: 270 70% 60%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 270 70% 60%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 270 70% 60%;
+    
+    --radius: 1rem;
   }
 }
 
@@ -37,18 +43,47 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground font-body antialiased selection:bg-primary/30;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-headline tracking-tight;
   }
 }
 
+/* Enhanced Glassmorphism from the reference */
 .glass-card {
-  @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl;
+  @apply bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.8)];
+  position: relative;
+  overflow: hidden;
 }
 
-.hero-gradient {
-  background: radial-gradient(circle at top left, hsla(263, 70%, 50%, 0.15), transparent 40%),
-              radial-gradient(circle at bottom right, hsla(174, 100%, 29%, 0.1), transparent 40%);
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-glow {
+  background: radial-gradient(circle at 50% -20%, hsla(270, 70%, 60%, 0.15), transparent 70%),
+              radial-gradient(circle at 0% 100%, hsla(270, 70%, 60%, 0.05), transparent 50%);
+}
+
+.cyber-button {
+  @apply relative transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-primary/20;
+}
+
+/* Custom Scrollbar for the dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
 }
