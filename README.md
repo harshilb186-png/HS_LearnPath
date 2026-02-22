@@ -20,11 +20,11 @@ git init
 ```
 
 ### 2. Connect to your Remote Repo
-Replace `<your-repo-url>` with your actual URL (e.g., `https://github.com/username/repo-name.git`).
+This command connects your local project to your GitHub repository.
 ```bash
-git remote add origin <your-repo-url>
+git remote add origin https://github.com/harshilb186-png/HS_LearnPath
 ```
-*If it says "remote origin already exists", you can skip this or use `git remote set-url origin <your-repo-url>`.*
+*If it says "remote origin already exists", use `git remote set-url origin https://github.com/harshilb186-png/HS_LearnPath` instead.*
 
 ### 3. Commit your changes
 ```bash
